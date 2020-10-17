@@ -24,6 +24,7 @@
     <modules>
         <module>rv-archetype-jar</module>
         <module>rv-parent-jar</module>
+        <module>rv-util</module>
     </modules>
 
     <properties>
