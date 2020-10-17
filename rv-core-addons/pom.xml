@@ -1,0 +1,59 @@
+<!--
+	Ravencloud, open source library.
+	Copyright (c) 2020 Alejandro Silva Sanahuja
+	mailto:asilva@ravencloud.es
+	
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+	which is available at https://www.apache.org/licenses/LICENSE-2.0.
+	
+	SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>rv-framework</artifactId>
+        <groupId>com.ravencloud</groupId>
+        <version>1.0.2-SNAPSHOT</version>
+    </parent>
+	
+	<artifactId>rv-core-addons</artifactId>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<maven.compiler.version>3.8.0</maven.compiler.version>
+	</properties>
+
+	<build>
+
+		<sourceDirectory>addons</sourceDirectory>
+	
+		<plugins>
+		
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+	
+	    </plugins>
+	
+		<resources>
+			<resource>
+				<directory>addons</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+
+	</build>
+
+</project>

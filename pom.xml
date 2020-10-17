@@ -25,6 +25,7 @@
         <module>rv-archetype-jar</module>
         <module>rv-parent-jar</module>
         <module>rv-util</module>
+        <module>rv-core-addons</module>
     </modules>
 
     <properties>
