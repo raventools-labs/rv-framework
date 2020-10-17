@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<property name="boolean.type" value="BOOLEAN DEFAULT FALSE" dbms="postgresql"/>
+	<property name="boolean.type" value="NUMERIC(1,0) DEFAULT 0" dbms="mariadb"/>
+	
+	<property name="boolean.value.TRUE" value="true" dbms="postgresql"/>
+	<property name="boolean.value.TRUE" value="1" dbms="mariadb"/>
+	
+
+	<changeSet id="crt_table_organization" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <not><tableExists schemaName="${DEFAULT_DATABASE}" tableName="ORGANIZATION"/></not>
+		</preConditions>
+		
+	 	<sql>
+	 	CREATE TABLE ${DEFAULT_DATABASE}.ORGANIZATION (
+	 		O_ID VARCHAR(32) PRIMARY KEY NOT NULL,
+	 		O_CREATION_TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		O_LAST_UPDATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		O_LAST_USER_MODIFY VARCHAR(50),
+			O_NAME VARCHAR(40),
+			O_DESCRIPTION VARCHAR(200),
+			O_DOMAIN VARCHAR(150),
+			O_PREFFIXDB VARCHAR(5),
+			O_ACTIVE ${boolean.type},
+	 		UNIQUE(O_NAME),
+	 		UNIQUE(O_DOMAIN),
+	 		UNIQUE(O_PREFFIXDB)
+		);	
+	 	</sql>
+	 </changeSet>
+	 
+	 <changeSet id="insert_default_organization" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <sqlCheck expectedResult="0">SELECT COUNT(*) FROM ${DEFAULT_DATABASE}.ORGANIZATION</sqlCheck>
+		</preConditions>
+		
+	 	<sql>
+	 	INSERT INTO ${DEFAULT_DATABASE}.ORGANIZATION(O_ID, O_CREATION_TIMESTAMP, O_LAST_UPDATE, O_LAST_USER_MODIFY, O_NAME, O_DESCRIPTION, O_DOMAIN, O_PREFFIXDB, O_ACTIVE)
+		VALUES ('9A5444AEE0CC4B48926C3501229A99BC',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'LIQUIDBASE','DEFAULT','Organization default','localhost','DF',${boolean.value.TRUE});
+	 	</sql>
+	 </changeSet>
+	 
+</databaseChangeLog>

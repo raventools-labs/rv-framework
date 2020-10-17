@@ -26,6 +26,7 @@
         <module>rv-parent-jar</module>
         <module>rv-util</module>
         <module>rv-core-addons</module>
+        <module>rv-core</module>
     </modules>
 
     <properties>
@@ -33,6 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <ravencloud.version>1.0.2-SNAPSHOT</ravencloud.version>
 
     </properties>
 

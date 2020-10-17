@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="crt_table_param" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <not><tableExists schemaName="${DEFAULT_DATABASE}" tableName="PARAM"/></not>
+		</preConditions>
+		
+	 	<sql>
+	 	CREATE TABLE ${DEFAULT_DATABASE}.PARAM (
+	 		P_ID VARCHAR(32) PRIMARY KEY NOT NULL,
+	 		P_NAME VARCHAR(100),
+	 		P_VALUE VARCHAR(500),
+	 		UNIQUE(P_NAME)
+		);	
+	 	</sql>
+	 </changeSet>
+
+	<changeSet id="crt_table_translation" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <not><tableExists schemaName="${DEFAULT_DATABASE}" tableName="TRANSLATION"/></not>
+		</preConditions>
+		
+	 	<sql>
+	 	CREATE TABLE ${DEFAULT_DATABASE}.TRANSLATION (
+	 		T_ID VARCHAR(32) PRIMARY KEY NOT NULL,
+	 		T_NAME VARCHAR(100),
+	 		T_LOCALE VARCHAR(5),
+	 		T_VALUE VARCHAR(1000),
+	 		UNIQUE(T_NAME,T_LOCALE)
+		);	
+	 	</sql>
+	 </changeSet>
+
+	<changeSet id="crt_table_user_rest" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <not><tableExists schemaName="${DEFAULT_DATABASE}" tableName="USERS"/></not>
+		</preConditions>
+		
+	 	<sql>
+	 	CREATE TABLE ${DEFAULT_DATABASE}.USERS (
+	 		U_ID VARCHAR(32) PRIMARY KEY NOT NULL,
+	 		U_CREATION_TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		U_LAST_UPDATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		U_LAST_USER_MODIFY VARCHAR(50),
+	 		U_NAME VARCHAR(50),
+	 		U_PASSWORD VARCHAR(128),
+	 		U_SALT VARCHAR(10),
+	 		U_EMAIL VARCHAR(320),
+	 		U_TOTPKEY VARCHAR(32),
+	 		UNIQUE(U_NAME)
+		);	
+	 	</sql>
+	 </changeSet>
+	 
+	 <changeSet id="crt_table_user_rol_rest" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <not><tableExists schemaName="${DEFAULT_DATABASE}" tableName="USER_ROL"/></not>
+		</preConditions>
+		
+	 	<sql>
+	 	CREATE TABLE ${DEFAULT_DATABASE}.USER_ROL (
+	 		U_ID VARCHAR(32) PRIMARY KEY NOT NULL,
+	 		U_CREATION_TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		U_LAST_UPDATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		U_LAST_USER_MODIFY VARCHAR(50),
+			U_USER VARCHAR(32),
+			U_ROLE VARCHAR(45)
+		);	
+	 	</sql>
+	 </changeSet>
+	 
+	 <changeSet id="crt_table_activity_rest" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <not><tableExists schemaName="${DEFAULT_DATABASE}" tableName="ACTIVITY_HISTORY"/></not>
+		</preConditions>
+		
+	 	<sql>
+	 	CREATE TABLE ${DEFAULT_DATABASE}.ACTIVITY_HISTORY (
+	 		A_ID VARCHAR(32) PRIMARY KEY NOT NULL,
+	 		A_TIMESTAMP TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 		A_IP VARCHAR(40),
+			A_USER VARCHAR(50),
+			A_METHOD VARCHAR(80),
+			A_OBSERVATIONS VARCHAR(300),
+			A_STATUS NUMERIC(5,0),
+			A_EXECUTION_TIME NUMERIC(10,0)
+		);	
+	 	</sql>
+	 </changeSet>
+	 
+	 <changeSet id="insert_user_admin" author="ravencloud">
+	 
+	 	<preConditions onError="MARK_RAN" onFail="MARK_RAN">
+		  <sqlCheck expectedResult="0">SELECT COUNT(*) FROM ${DEFAULT_DATABASE}.USERS</sqlCheck>
+		</preConditions>
+		
+	 	<sql>
+	 	INSERT INTO ${DEFAULT_DATABASE}.USERS (U_ID,U_CREATION_TIMESTAMP,U_LAST_UPDATE,U_LAST_USER_MODIFY,U_NAME,U_PASSWORD,U_SALT)
+		VALUES ('C4153FE99C1640718FC62E0D3C6C4711',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'LIQUIDBASE','admin','df696c1da02b6192b6306818d15562feace1dcdc77999545756206b15d2ebbf2','420F7CED29');
+
+		INSERT INTO ${DEFAULT_DATABASE}.USER_ROL (U_ID,U_CREATION_TIMESTAMP,U_LAST_UPDATE,U_LAST_USER_MODIFY,U_USER,U_ROLE)
+		VALUES ('5E662DF1F1D24DDC86D64E8DA842A82E',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'LIQUIDBASE','C4153FE99C1640718FC62E0D3C6C4711','ADMIN');
+
+		INSERT INTO ${DEFAULT_DATABASE}.USER_ROL (U_ID,U_CREATION_TIMESTAMP,U_LAST_UPDATE,U_LAST_USER_MODIFY,U_USER,U_ROLE) 
+		VALUES ('8180A0B70F004A339767882CD973EC80',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'LIQUIDBASE','C4153FE99C1640718FC62E0D3C6C4711','ACTIVE');
+		
+		INSERT INTO ${DEFAULT_DATABASE}.USER_ROL (U_ID,U_CREATION_TIMESTAMP,U_LAST_UPDATE,U_LAST_USER_MODIFY,U_USER,U_ROLE) 
+		VALUES ('A974FDFF4FD84B5C885E205F8470475E',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'LIQUIDBASE','C4153FE99C1640718FC62E0D3C6C4711','REST_UI')
+	 	</sql>
+	 </changeSet>
+	 
+</databaseChangeLog>
