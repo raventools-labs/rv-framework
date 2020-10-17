@@ -21,7 +21,7 @@
         <version>1.0.2-SNAPSHOT</version>
     </parent>
     
-	<artifactId>rv-parent-war</artifactId>
+	<artifactId>rv-parent-web</artifactId>
 	<packaging>pom</packaging>
 
 	<properties>
