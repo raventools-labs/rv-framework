@@ -20,23 +20,6 @@
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>rv-util</artifactId>
-	
-	<distributionManagement>
-	    <repository>
-	        <uniqueVersion>true</uniqueVersion>
-	        <id>central</id>
-	        <name>Ravencloud Release Repository</name>
-	        <url>https://artifactory.ravencloud.es/artifactory/libs-release</url>
-	        <layout>default</layout>
-	    </repository>
-	    <snapshotRepository>
-	        <uniqueVersion>true</uniqueVersion>
-	        <id>snapshots</id>
-	        <name>Ravencloud Snapshot Repository</name>
-	        <url>https://artifactory.ravencloud.es/artifactory/libs-snapshot</url>
-	        <layout>default</layout>
-	    </snapshotRepository>
-	</distributionManagement>
 
 	<dependencies>
 
@@ -109,29 +92,5 @@
 		</dependency>
 
 	</dependencies>
-	
-	<build>
-		<plugins>
-			<plugin>
-		        <groupId>com.google.code.maven-license-plugin</groupId>
-		        <artifactId>maven-license-plugin</artifactId>
-		        <version>${maven-license-plugin.version}</version>
-		        <configuration>
-		            <header>${basedir}/header-license.txt</header>
-		            <includes>
-		            	<include>**/*.java</include>
-		            	<include>${basedir}/pom.xml</include>
-		            </includes>
-		        </configuration>
-		        <executions>
-		            <execution>
-		                <goals>
-		                    <goal>check</goal>
-		                </goals>
-		            </execution>
-		        </executions>
-		    </plugin>
-		</plugins>
-	</build>
 	
 </project>
