@@ -27,6 +27,8 @@
         <module>rv-util</module>
         <module>rv-core-addons</module>
         <module>rv-core</module>
+        <module>rv-parent-web</module>
+        <module>rv-session-redis</module>
     </modules>
 
     <properties>

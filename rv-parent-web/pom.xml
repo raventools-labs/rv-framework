@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Ravencloud, open source library.
+	Copyright (c) 2020 Alejandro Silva Sanahuja
+	mailto:asilva@ravencloud.es
+	
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
+	which is available at https://www.apache.org/licenses/LICENSE-2.0.
+	
+	SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <groupId>com.ravencloud</groupId>
+        <artifactId>rv-parent-jar</artifactId>
+        <version>1.0.2-SNAPSHOT</version>
+    </parent>
+    
+	<artifactId>rv-parent-war</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<rest-ui.path>rest-ui</rest-ui.path>
+		<rest.path>rest</rest.path>
+		<addons-tmp.path>addons</addons-tmp.path>
+	</properties>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.ravencloud</groupId>
+			<artifactId>rv-core</artifactId>
+			<version>${ravencloud.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build-helper-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src</source>
+								<source>properties</source>
+								<source>i18n</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>swagger-ui</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.webjars</groupId>
+									<artifactId>swagger-ui</artifactId>
+									<version>${swagger-ui.version}</version>
+									<outputDirectory>${project.build.directory}/${rest-ui.path}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+					<execution>
+						<id>addons-web</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.ravencloud</groupId>
+									<artifactId>rv-core-addons</artifactId>
+									<version>${ravencloud.version}</version>
+									<outputDirectory>${project.build.directory}/${addons-tmp.path}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tmp-addons</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.ravencloud</groupId>
+									<artifactId>rv-core-addons</artifactId>
+									<version>${ravencloud.version}</version>
+									<outputDirectory>${project.build.directory}/${addons-tmp.path}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>copy-default-directorys</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="copy-default-directory">
+								<taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath" />
+								
+								<if>
+									<not>
+										<available file="${basedir}/properties/" type="dir" />
+									</not>
+									<then>
+										<copy todir="${basedir}/properties/">
+											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-properties/" />
+										</copy>
+										<echo>Created directory properties</echo>
+									</then>
+								</if>
+								
+								<if>
+									<not>
+										<available file="${basedir}/i18n/" type="dir" />
+									</not>
+									<then>
+										<copy todir="${basedir}/i18n/">
+											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-i18n/" />
+										</copy>
+										<echo>Created directory i18n</echo>
+									</then>
+								</if>
+								
+								<if>
+									<not>
+										<available file="${basedir}/web/rv/" type="dir" />
+									</not>
+									<then>
+										<copy todir="${basedir}/web/rv/">
+											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-web/rv/" />
+										</copy>
+										<echo>Created directory web/rv</echo>
+									</then>
+								</if>
+								
+								<if>
+									<not>
+										<available file="${basedir}/web/img/" type="dir" />
+									</not>
+									<then>
+										<copy todir="${basedir}/web/img/">
+											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-web/img/" />
+										</copy>
+										<echo>Created directory web/img</echo>
+									</then>
+								</if>
+								
+								<if>
+									<not>
+										<available file="${basedir}/web/WEB-INF/" type="dir" />
+									</not>
+									<then>
+										<copy todir="${basedir}/web/WEB-INF/">
+											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-web/WEB-INF/" />
+										</copy>
+										<echo>Created directory web/WEB-INF</echo>
+									</then>
+								</if>
+								
+								<if>
+									<not>
+										<available file="${basedir}/web/default.jsp" type="file" />
+									</not>
+									<then>
+										<copy tofile="${basedir}/web/default.jsp">
+											<fileset file="${project.build.directory}/${addons-tmp.path}/default-web/default.jsp" />
+										</copy>
+										<echo>Created file default.jsp</echo>
+									</then>
+								</if>
+								
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>ant-contrib</groupId>
+						<artifactId>ant-contrib</artifactId>
+						<version>${ant-contrib.version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>ant</groupId>
+								<artifactId>ant</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-nodeps</artifactId>
+						<version>${org.apache.ant.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>${replacer.version}</version>
+				<executions>
+					<execution>
+						<id>swagger-index</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${project.build.directory}/${rest-ui.path}/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}/index.html</file>
+							<replacements>
+								<replacement>
+									<token>https://petstore.swagger.io/v2/swagger.json</token>
+									<value>/${project.name}/${rest.path}/openapi.json</value>
+								</replacement>
+								<replacement>
+									<token>&lt;style&gt;</token>
+									<value>&lt;link rel="stylesheet" type="text/css"
+										href="/${project.name}/rv/css/swagger-ui-custom.css"&gt;&lt;style&gt;</value>
+								</replacement>
+								<replacement>
+									<token>./favicon-32x32.png</token>
+									<value>/${project.name}/img/favicon-32x32.png</value>
+								</replacement>
+								<replacement>
+									<token>./favicon-16x16.png</token>
+									<value>/${project.name}/img/favicon-16x16.png</value>
+								</replacement>
+								<replacement>
+									<token>Swagger UI</token>
+									<value>${title-swagger-ui}</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+					<execution>
+						<id>swagger-js</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+						<configuration>
+							<file>${project.build.directory}/${rest-ui.path}/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}/swagger-ui-standalone-preset.js</file>
+							<replacements>
+								<replacement>
+									<token>(t.exports=")((data:image)(.)*(NCg==))</token>
+									<value>$1../img/title.png</value>
+								</replacement>
+							</replacements>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven.war.version}</version>
+				<configuration>
+					<warSourceDirectory>web</warSourceDirectory>
+					<webResources combine.children="append">
+						<resource>
+							<directory>${project.build.directory}/${rest-ui.path}/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}</directory>
+							<includes>
+								<include>**/*.*</include>
+							</includes>
+							<targetPath>${rest-ui.path}</targetPath>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

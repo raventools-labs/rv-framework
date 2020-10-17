@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 	Ravencloud, open source library.
 	Copyright (c) 2020 Alejandro Silva Sanahuja
@@ -19,7 +20,9 @@
 		<artifactId>rv-parent-jar</artifactId>
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
+	
 	<artifactId>rv-util</artifactId>
+	<packaging>jar</packaging>
 
 	<dependencies>
 
