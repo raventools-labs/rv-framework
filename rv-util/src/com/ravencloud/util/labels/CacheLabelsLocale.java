@@ -14,18 +14,26 @@ package com.ravencloud.util.labels;
 
 import org.ehcache.Cache;
 
+import com.ravencloud.util.exception.NotImplementedException;
+import com.ravencloud.util.general.Condition;
+
 public class CacheLabelsLocale extends AbstractLocaleLabels {
 
 	private static final String NAME_CACHE = "Locale.%s";
 	
 	private Cache<String, String> cacheLabelLocale;
 	
-	public CacheLabelsLocale(String locale) {
+	public CacheLabelsLocale(String locale) throws NotImplementedException {
 		
 		super(locale);
 		
 		cacheLabelLocale = CacheLabels.getInstance().getCacheManager().getCache(
-				String.format(NAME_CACHE, locale), String.class, String.class);
+			String.format(NAME_CACHE, locale), String.class, String.class);
+		
+		if(Condition.empty(cacheLabelLocale)) {
+			
+			throw new NotImplementedException(locale);
+		}
 	}
 
 	@Override

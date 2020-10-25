@@ -35,6 +35,10 @@ public interface AppConfig extends Config {
 	@DefaultValue(value = "false")
 	boolean multiOrganization();
 	
+	@Key("project.defaultLocale")
+	@DefaultValue(value = "en_EN")
+	String defaultLocale();
+	
 	@Key("db.masterDatabase")
 	@DefaultValue(value = "RVMASTER")
 	String masterDatabase();
@@ -55,4 +59,7 @@ public interface AppConfig extends Config {
 	@Key("web.contextPath")
 	@DefaultValue(value = "/")
 	String contextPath();
+	
+	@Key("catalina.home")
+	String catalinaHome();
 }

@@ -156,6 +156,13 @@
                     <exclude>logback.xml</exclude>
                 </excludes>
             </resource>
+            <resource>
+            	<directory>resources</directory>
+            	 <filtering>false</filtering>
+ 				<includes>
+ 					<include>**/*</include>
+ 				</includes>
+            </resource>
         </resources>
 
     </build>

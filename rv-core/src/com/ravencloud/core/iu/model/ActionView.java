@@ -61,7 +61,7 @@ public class ActionView extends AbstractElementView {
 		
 		input.attrValue(ManagerLabels.INSTANCE.get(String.format(LABEL, module, name)));
 		
-		input.attrOnclick((String.format(ON_CLICK, App.INSTANCE.artifactId(), module, name)));
+		input.attrOnclick((String.format(ON_CLICK, App.INSTANCE.contextPath(), module, name)));
 		
 		input.__().__();
 		

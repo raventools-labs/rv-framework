@@ -40,7 +40,7 @@ public class SwaggerView extends NotInitModelView {
 	//@formatter:off
 	private static void view(DynamicHtml<RavencloudContext<NoModel>> view, RavencloudContext<NoModel> context) {
 		
-		String applicationPath = App.INSTANCE.contextPath();
+		String contextPath = App.INSTANCE.contextPath();
 			
 		Html<HtmlView> html = view.html();
 		
@@ -53,9 +53,9 @@ public class SwaggerView extends NotInitModelView {
 		}
 			
 		body.div().attrId("swagger-ui").__()
-			.script().attrSrc(applicationPath + "/rest-ui/swagger-ui-bundle.js").__()
-			.script().attrSrc(applicationPath + "/rest-ui/swagger-ui-standalone-preset.js").__()
-			.script().text("rv.initSwagger('" + applicationPath + "');").__()
+			.script().attrSrc(contextPath + "rest-ui/swagger-ui-bundle.js").__()
+			.script().attrSrc(contextPath + "rest-ui/swagger-ui-standalone-preset.js").__()
+			.script().text("rv.initSwagger('" + contextPath + "');").__()
 		.__().__();
 	}
 	//@formatter:on

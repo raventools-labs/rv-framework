@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-	Ravencloud, open source library.
-	Copyright (c) 2020 Alejandro Silva Sanahuja
-	mailto:asilva@ravencloud.es
-	
-	This program and the accompanying materials are made available under the
-	terms of the Eclipse Public License 2.0 which is available at
-	https://www.eclipse.org/legal/epl-2.0, or the Apache License, Version 2.0
-	which is available at https://www.apache.org/licenses/LICENSE-2.0.
-	
-	SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
--->
+<!-- Ravencloud, open source library. Copyright (c) 2020 Alejandro Silva 
+	Sanahuja mailto:asilva@ravencloud.es This program and the accompanying materials 
+	are made available under the terms of the Eclipse Public License 2.0 which 
+	is available at https://www.eclipse.org/legal/epl-2.0, or the Apache License, 
+	Version 2.0 which is available at https://www.apache.org/licenses/LICENSE-2.0. 
+	SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <groupId>com.ravencloud</groupId>
-        <artifactId>rv-parent-jar</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
-    </parent>
-    
+		<groupId>com.ravencloud</groupId>
+		<artifactId>rv-parent-jar</artifactId>
+		<version>1.0.2-SNAPSHOT</version>
+	</parent>
+
 	<artifactId>rv-parent-web</artifactId>
 	<packaging>pom</packaging>
 
@@ -61,7 +55,6 @@
 							<sources>
 								<source>src</source>
 								<source>properties</source>
-								<source>i18n</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -138,80 +131,75 @@
 						</goals>
 						<configuration>
 							<target name="copy-default-directory">
-								<taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="maven.plugin.classpath" />
-								
+								<taskdef resource="net/sf/antcontrib/antlib.xml"
+									classpathref="maven.plugin.classpath" />
+
 								<if>
 									<not>
 										<available file="${basedir}/properties/" type="dir" />
 									</not>
 									<then>
 										<copy todir="${basedir}/properties/">
-											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-properties/" />
+											<fileset
+												dir="${project.build.directory}/${addons-tmp.path}/default-properties/" />
 										</copy>
 										<echo>Created directory properties</echo>
 									</then>
 								</if>
-								
-								<if>
-									<not>
-										<available file="${basedir}/i18n/" type="dir" />
-									</not>
-									<then>
-										<copy todir="${basedir}/i18n/">
-											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-i18n/" />
-										</copy>
-										<echo>Created directory i18n</echo>
-									</then>
-								</if>
-								
+
 								<if>
 									<not>
 										<available file="${basedir}/web/rv/" type="dir" />
 									</not>
 									<then>
 										<copy todir="${basedir}/web/rv/">
-											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-web/rv/" />
+											<fileset
+												dir="${project.build.directory}/${addons-tmp.path}/default-web/rv/" />
 										</copy>
 										<echo>Created directory web/rv</echo>
 									</then>
 								</if>
-								
+
 								<if>
 									<not>
 										<available file="${basedir}/web/img/" type="dir" />
 									</not>
 									<then>
 										<copy todir="${basedir}/web/img/">
-											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-web/img/" />
+											<fileset
+												dir="${project.build.directory}/${addons-tmp.path}/default-web/img/" />
 										</copy>
 										<echo>Created directory web/img</echo>
 									</then>
 								</if>
-								
+
 								<if>
 									<not>
 										<available file="${basedir}/web/WEB-INF/" type="dir" />
 									</not>
 									<then>
 										<copy todir="${basedir}/web/WEB-INF/">
-											<fileset dir="${project.build.directory}/${addons-tmp.path}/default-web/WEB-INF/" />
+											<fileset
+												dir="${project.build.directory}/${addons-tmp.path}/default-web/WEB-INF/" />
 										</copy>
 										<echo>Created directory web/WEB-INF</echo>
 									</then>
 								</if>
-								
+
 								<if>
 									<not>
-										<available file="${basedir}/web/default.jsp" type="file" />
+										<available file="${basedir}/web/default.jsp"
+											type="file" />
 									</not>
 									<then>
 										<copy tofile="${basedir}/web/default.jsp">
-											<fileset file="${project.build.directory}/${addons-tmp.path}/default-web/default.jsp" />
+											<fileset
+												file="${project.build.directory}/${addons-tmp.path}/default-web/default.jsp" />
 										</copy>
 										<echo>Created file default.jsp</echo>
 									</then>
 								</if>
-								
+
 							</target>
 						</configuration>
 					</execution>

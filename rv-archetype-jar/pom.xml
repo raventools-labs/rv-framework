@@ -21,7 +21,7 @@
         <version>1.0.2-SNAPSHOT</version>
     </parent>
     
-    <artifactId>rv-jar-archetype</artifactId>
+    <artifactId>rv-archetype-jar</artifactId>
     <packaging>maven-archetype</packaging>
 
     <build>

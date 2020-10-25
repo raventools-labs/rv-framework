@@ -12,6 +12,7 @@
  */
 package com.ravencloud.session.redis;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,6 @@ import org.redisson.config.Config;
 
 import com.ravencloud.util.exception.UncofiguratedException;
 import com.ravencloud.util.general.App;
-import com.ravencloud.util.general.ClassUtils;
 import com.ravencloud.util.general.Condition;
 import com.ravencloud.util.general.Json;
 import com.ravencloud.util.session.AbstractSessionManager;
@@ -33,7 +33,7 @@ public final class ManagerSessionRedis extends AbstractSessionManager {
 
 	private static final String KEY_RUTE_CONFIG = "redis.configFile";
 	
-	private static final String DEFAULT_VALUE = "redis.yalm";
+	private static final String DEFAULT_VALUE = "/conf/redis.yalm";
 	
 	private static ISessionManager instance;
 
@@ -43,11 +43,13 @@ public final class ManagerSessionRedis extends AbstractSessionManager {
 
 		super();
 		
-		String ruteConfig = App.INSTANCE.getProperty(String.class, KEY_RUTE_CONFIG,DEFAULT_VALUE);
+		String defaultPath = App.INSTANCE.catalinaHome() + DEFAULT_VALUE;
+		
+		String ruteConfig = App.INSTANCE.getProperty(String.class, KEY_RUTE_CONFIG, defaultPath);
 		
 		try {
 			
-			config = Config.fromYAML(ClassUtils.INSTANCE.getResourceFromClasspath(ruteConfig));
+			config = Config.fromYAML(new File(ruteConfig));
 			
 		} catch (IOException e) {
 			

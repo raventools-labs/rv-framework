@@ -12,6 +12,9 @@
  */
 package com.ravencloud.core.web;
 
+import java.util.Locale;
+
+import org.apache.commons.lang3.LocaleUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -48,6 +51,8 @@ public class InitJob implements Job {
 			ManagerActions.INSTANCE.addActions(SignInAction.class.getPackage().getName());
 			
 			ManagerViews.INSTANCE.addViews(LoginView.class.getPackage().getName());
+			
+			Locale.setDefault(LocaleUtils.toLocale(App.INSTANCE.defaultLocale()));
 			
 			initChangeDatabase();
 

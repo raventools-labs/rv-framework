@@ -93,6 +93,11 @@ public enum App implements AppConfig {
 	}
 	
 	@Override
+	public String defaultLocale() {
+		return config.defaultLocale();
+	}
+	
+	@Override
 	public String masterDatabase() {
 		return config.masterDatabase();
 	}
@@ -125,5 +130,10 @@ public enum App implements AppConfig {
 	@Override
 	public String contextPath() {
 		return config.contextPath();
+	}
+	
+	@Override
+	public String catalinaHome() {
+		return config.catalinaHome();
 	}
 }

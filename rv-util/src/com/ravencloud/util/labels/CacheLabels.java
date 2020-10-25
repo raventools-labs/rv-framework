@@ -21,6 +21,7 @@ import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.xml.XmlConfiguration;
 
+import com.ravencloud.util.exception.NotImplementedException;
 import com.ravencloud.util.general.App;
 import com.ravencloud.util.general.ClassUtils;
 import com.ravencloud.util.general.Condition;
@@ -78,7 +79,16 @@ public final class CacheLabels implements LabelsStrategy {
 		
 		if(Condition.empty(labelLocale)) {
 			
-			labelLocale = new CacheLabelsLocale(locale);
+			try {
+				
+				labelLocale = new CacheLabelsLocale(locale);
+			
+			} catch (NotImplementedException ex) {
+				
+				log.warn("No implemented cache from locale: " + locale);
+				
+				labelLocale = getLabelLocale(App.INSTANCE.defaultLocale());
+			}
 			
 			labels.put(locale, labelLocale);
 		}

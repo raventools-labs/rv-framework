@@ -14,6 +14,8 @@ public enum RestUtils {
 	
 	INSTANCE;
 	
+	private static final int POSITION_FIRST_SLASH = 1;
+	
 	public void initOpenApiRest() {
 		
 		DynamicOpenAPIDefinition dynamic = new DynamicOpenAPIDefinition(
@@ -23,13 +25,15 @@ public enum RestUtils {
 		
 		DynamicServer server = new DynamicServer();
 		
-		server.setUrl(App.INSTANCE.contextPath() + RestServlet.PATH_REST);
+		String contextPath = App.INSTANCE.contextPath();
+		
+		server.setUrl(contextPath + RestServlet.PATH_REST.substring(POSITION_FIRST_SLASH));
 		
 		servers.add(server);
 		
 		server = new DynamicServer();
 		
-		server.setUrl(App.INSTANCE.contextPath() + RestServlet.PATH_MODULE);
+		server.setUrl(contextPath + RestServlet.PATH_MODULE.substring(POSITION_FIRST_SLASH));
 		
 		servers.add(server);
 		
