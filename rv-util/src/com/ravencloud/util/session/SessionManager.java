@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.LocaleUtils;
 
+import com.ravencloud.util.exception.ProgrammingException;
 import com.ravencloud.util.general.App;
 import com.ravencloud.util.general.ClassUtils;
 import com.ravencloud.util.general.Condition;
@@ -74,8 +75,15 @@ public enum SessionManager {
 	
 	public String getStringLocale() {
 		
-		return Condition.evalNotEmpty(SessionManager.INSTANCE.get(SessionParameter.LOCALE),
-			LabelsStrategy.getDefault());
+		try {
+			
+			return Condition.evalNotEmpty(SessionManager.INSTANCE.get(SessionParameter.LOCALE),
+				LabelsStrategy.getDefault());
+			
+		} catch (ProgrammingException ex) {
+			
+			return LabelsStrategy.getDefault();
+		}
 	}
 	
 	public Locale getLocale() {

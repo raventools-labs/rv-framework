@@ -68,12 +68,12 @@ public enum ClassUtils {
 	
 	public String getPathClass(String relativePath) throws IOException {
 		
-		String pathClass = null;
+		String pathClass = "";
 
 		Enumeration<URL> en = Thread.currentThread().getContextClassLoader().getResources("");
 		
 		if (en.hasMoreElements()) pathClass = en.nextElement().getPath();
-			
+		
 		return pathClass + relativePath;
 	}
 	

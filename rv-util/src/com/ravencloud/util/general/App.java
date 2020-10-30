@@ -45,7 +45,7 @@ public enum App implements AppConfig {
 
 		} catch (Exception ex) {
 
-			config = ConfigFactory.create(AppConfig.class);
+			config = ConfigFactory.create(AppConfig.class, properties);
 
 			LoggerFactory.getLogger(App.class)
 				.warn(MessageFormat.format("Problem to load {0} - cause: {1}", NAME_PROPERTIES, ex.getMessage()));

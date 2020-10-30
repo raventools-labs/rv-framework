@@ -30,17 +30,17 @@ public enum StringToNumberUtils implements IStringToValueConverter<Number> {
 	@Override
 	public Number converter(String value, Number defaultValue) {
 
-		Number numberValue;
+		Number numberValue = defaultValue;
 		
-		try {
+		if(!Condition.empty(value)) {
 			
-			numberValue = Condition.evalNotEmpty(sessionNumberFormat().parse(value), defaultValue);
-			
-		} catch (ParseException ex) {
-			
-			numberValue = defaultValue;
+			try {
+				
+				numberValue = Condition.evalNotEmpty(sessionNumberFormat().parse(value), defaultValue);
+				
+			} catch (ParseException ex) {}
 		}
-		
+
 		return numberValue;
 	}
 	
