@@ -63,6 +63,12 @@
 		</dependency>
 
 		<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+
+		<dependency>
 			<groupId>com.ravencloud</groupId>
 			<artifactId>rv-util</artifactId>
 			<version>1.0.2-SNAPSHOT</version>
