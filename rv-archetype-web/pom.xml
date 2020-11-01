@@ -5,6 +5,7 @@
     <artifactId>rv-framework</artifactId>
     <groupId>com.ravencloud</groupId>
     <version>1.0.2-SNAPSHOT</version>
+    <relativePath></relativePath>
   </parent>
 
   <artifactId>rv-archetype-web</artifactId>

@@ -6,7 +6,10 @@ import com.ravencloud.util.exception.BuildException;
 import com.ravencloud.util.general.App;
 import com.ravencloud.util.general.Builder;
 
-public final class TomcatBuilder implements Builder<RavencloudTomcat> {
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public final class TomcatBuilder implements Builder<Tomcat> {
 	
 	private Document serverXml;
 	
@@ -21,15 +24,21 @@ public final class TomcatBuilder implements Builder<RavencloudTomcat> {
 	}
 	
 	@Override
-	public RavencloudTomcat build() throws BuildException {
+	public Tomcat build() throws BuildException {
 		
 		try {
 			
-			RavencloudTomcat tomcat = new RavencloudTomcat();
+			log.info("catalinaHome: " + App.INSTANCE.catalinaHome());
+			
+			log.info("pathDeploy: " + App.INSTANCE.pathDeploy());
+			
+			Tomcat tomcat = new Tomcat();
 			
 			tomcat.setBaseDir(App.INSTANCE.catalinaHome());
 			
 			tomcat.setConnectors(TomcatUtils.INSTANCE.getConnectors(serverXml));
+			
+			tomcat.enableLog();
 			
 			tomcat.enableContext();
 			

@@ -19,16 +19,16 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>rv-archetype-jar</module>
         <module>rv-parent-jar</module>
+        <module>rv-archetype-jar</module>
         <module>rv-util</module>
-        <module>rv-core-addons</module>
+        <module>rv-tomcat</module>
+    	<module>rv-tomcat-dependecies</module>
         <module>rv-core</module>
         <module>rv-parent-web</module>
         <module>rv-session-redis</module>
 	    <module>rv-archetype-web</module>
-	    <module>rv-tomcat</module>
-    </modules>
+  </modules>
 
     <properties>
 

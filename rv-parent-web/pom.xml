@@ -13,6 +13,7 @@
 		<groupId>com.ravencloud</groupId>
 		<artifactId>rv-parent-jar</artifactId>
 		<version>1.0.2-SNAPSHOT</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>rv-parent-web</artifactId>
@@ -21,7 +22,6 @@
 	<properties>
 		<rest-ui.path>rest-ui</rest-ui.path>
 		<rest.path>rest</rest.path>
-		<addons-tmp.path>addons</addons-tmp.path>
 	</properties>
 
 	<dependencies>
@@ -82,7 +82,24 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>addons-web</id>
+						<id>tomcat</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.ravencloud</groupId>
+									<artifactId>rv-tomcat</artifactId>
+									<version>${tomcat.version}</version>
+									<outputDirectory>${project.build.directory}/tomcat</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+						<execution>
+						<id>tomcat-dependencies</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>unpack</goal>
@@ -91,137 +108,14 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>com.ravencloud</groupId>
-									<artifactId>rv-core-addons</artifactId>
-									<version>${ravencloud.version}</version>
-									<outputDirectory>${project.build.directory}/${addons-tmp.path}</outputDirectory>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-					<execution>
-						<id>tmp-addons</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.ravencloud</groupId>
-									<artifactId>rv-core-addons</artifactId>
-									<version>${ravencloud.version}</version>
-									<outputDirectory>${project.build.directory}/${addons-tmp.path}</outputDirectory>
+									<artifactId>rv-tomcat-dependencies</artifactId>
+									<version>${tomcat.version}</version>
+									<outputDirectory>${project.build.directory}/tomcat</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>copy-default-directorys</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<target name="copy-default-directory">
-								<taskdef resource="net/sf/antcontrib/antlib.xml"
-									classpathref="maven.plugin.classpath" />
-
-								<if>
-									<not>
-										<available file="${basedir}/properties/" type="dir" />
-									</not>
-									<then>
-										<copy todir="${basedir}/properties/">
-											<fileset
-												dir="${project.build.directory}/${addons-tmp.path}/default-properties/" />
-										</copy>
-										<echo>Created directory properties</echo>
-									</then>
-								</if>
-
-								<if>
-									<not>
-										<available file="${basedir}/web/rv/" type="dir" />
-									</not>
-									<then>
-										<copy todir="${basedir}/web/rv/">
-											<fileset
-												dir="${project.build.directory}/${addons-tmp.path}/default-web/rv/" />
-										</copy>
-										<echo>Created directory web/rv</echo>
-									</then>
-								</if>
-
-								<if>
-									<not>
-										<available file="${basedir}/web/img/" type="dir" />
-									</not>
-									<then>
-										<copy todir="${basedir}/web/img/">
-											<fileset
-												dir="${project.build.directory}/${addons-tmp.path}/default-web/img/" />
-										</copy>
-										<echo>Created directory web/img</echo>
-									</then>
-								</if>
-
-								<if>
-									<not>
-										<available file="${basedir}/web/WEB-INF/" type="dir" />
-									</not>
-									<then>
-										<copy todir="${basedir}/web/WEB-INF/">
-											<fileset
-												dir="${project.build.directory}/${addons-tmp.path}/default-web/WEB-INF/" />
-										</copy>
-										<echo>Created directory web/WEB-INF</echo>
-									</then>
-								</if>
-
-								<if>
-									<not>
-										<available file="${basedir}/web/default.jsp"
-											type="file" />
-									</not>
-									<then>
-										<copy tofile="${basedir}/web/default.jsp">
-											<fileset
-												file="${project.build.directory}/${addons-tmp.path}/default-web/default.jsp" />
-										</copy>
-										<echo>Created file default.jsp</echo>
-									</then>
-								</if>
-
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>ant-contrib</groupId>
-						<artifactId>ant-contrib</artifactId>
-						<version>${ant-contrib.version}</version>
-						<exclusions>
-							<exclusion>
-								<groupId>ant</groupId>
-								<artifactId>ant</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.apache.ant</groupId>
-						<artifactId>ant-nodeps</artifactId>
-						<version>${org.apache.ant.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 
 			<plugin>
@@ -285,6 +179,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven.war.version}</version>
 				<configuration>
+					<webappDirectory>${project.build.directory}/webapps</webappDirectory>
 					<warSourceDirectory>web</warSourceDirectory>
 					<webResources combine.children="append">
 						<resource>

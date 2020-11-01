@@ -13,6 +13,7 @@
 		<groupId>com.ravencloud</groupId>
 		<artifactId>rv-parent-jar</artifactId>
 		<version>1.0.2-SNAPSHOT</version>
+		<relativePath></relativePath>
 	</parent>
 
 	<artifactId>rv-core</artifactId>

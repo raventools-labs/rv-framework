@@ -1,8 +1,10 @@
 package com.ravencloud.tomcat;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -96,13 +98,13 @@ public enum TomcatUtils {
 			
 			String path = App.INSTANCE.catalinaHome() + PATH_SERVER_XML;
 			
-			document = getDocument(path);
+			document = getDocument(new FileInputStream(Paths.get(path).toFile()));
 			
 		} catch (Exception ex) {
 			
 			try {
 				
-				document = getDocument(ClassUtils.INSTANCE.getPathClass(DEFAULT_SERVER_XML));
+				document = getDocument(ClassUtils.INSTANCE.getResourceFromClasspath(DEFAULT_SERVER_XML));
 				
 				log.warn("Not found server.xml in catalina home, using the default");
 				
@@ -115,7 +117,7 @@ public enum TomcatUtils {
 		return document;
 	}
 	
-	private Document getDocument(String xml) throws ParserConfigurationException, SAXException, IOException {
+	private Document getDocument(InputStream xml) throws ParserConfigurationException, SAXException, IOException {
 		
 		DocumentBuilderFactory df = DocumentBuilderFactory.newInstance();
 		df.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");

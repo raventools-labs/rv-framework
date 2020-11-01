@@ -16,13 +16,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.Enumeration;
 
 import com.ravencloud.util.exception.ProgrammingException;
 
-public enum ClassUtils {
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+public enum ClassUtils {
+	
 	INSTANCE;
 	
 	private static final String METHOD_GET_INSTANCE = "getInstance";
@@ -36,8 +42,9 @@ public enum ClassUtils {
 			
 		} catch (Exception ex) {
 			
-			throw new ProgrammingException("Not access to getInstance",ex);
+			throw new ProgrammingException("Not access to getInstance", ex);
 		}
+		
 	}
 	
 	public boolean isInterface(Class<?> type, Class<?> typeInterface) {
@@ -47,7 +54,7 @@ public enum ClassUtils {
 		Class<?>[] interfaces = type.getInterfaces();
 		
 		for(int i = 0; !isInterface && i < interfaces.length; i++) {
-
+			
 			isInterface = interfaces[i].equals(typeInterface);
 		}
 		
@@ -59,26 +66,61 @@ public enum ClassUtils {
 			
 			return isInterface(type.getSuperclass(), typeInterface);
 		}
+		
 	}
 	
 	public InputStream getResourceFromClasspath(String relativePath) throws IOException {
 		
-		return new FileInputStream(new File(getPathClass(relativePath)));
+		try {
+			
+			return new FileInputStream(getPathClass(relativePath));
+			
+		} catch (IOException e) {
+			
+			return Thread.currentThread().getContextClassLoader().getResourceAsStream(relativePath);
+		}
 	}
 	
-	public String getPathClass(String relativePath) throws IOException {
+	public File getPathClass(String relativePath) throws IOException {
 		
-		String pathClass = "";
-
+		File file = getDefaultPathClass(relativePath);
+		
 		Enumeration<URL> en = Thread.currentThread().getContextClassLoader().getResources("");
 		
-		if (en.hasMoreElements()) pathClass = en.nextElement().getPath();
+		while (!file.exists() && en.hasMoreElements()) {
+			
+			try {
+				
+				file = getFile(en.nextElement(), relativePath);
+				
+			} catch (URISyntaxException ex) {
+				
+				log.warn(ex.getMessage());
+			}
+			
+		}
 		
-		return pathClass + relativePath;
+		return file;
+	}
+	
+	public File getDefaultPathClass(String relativePath) {
+		
+		return new File(relativePath);
 	}
 	
 	public String getPackage(Class<?> type) {
 		
 		return type.getPackage().getName();
+	}
+	
+	private File getFile(URL url, String relativePath) throws URISyntaxException {
+		
+		URI uri = url.toURI();
+		
+		String path = uri.getPath();
+		
+		String newPath = path + relativePath;
+		
+		return Paths.get(uri.resolve(newPath)).toFile();
 	}
 }
