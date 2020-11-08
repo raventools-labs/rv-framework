@@ -11,9 +11,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.ravencloud</groupId>
-		<artifactId>rv-parent-jar</artifactId>
-		<version>1.0.2-SNAPSHOT</version>
-		<relativePath></relativePath>
+		<artifactId>rv-framework</artifactId>
+		<version>1.0.3</version>
 	</parent>
 
 	<artifactId>rv-parent-web</artifactId>
@@ -94,6 +93,7 @@
 									<artifactId>rv-tomcat</artifactId>
 									<version>${tomcat.version}</version>
 									<outputDirectory>${project.build.directory}/tomcat</outputDirectory>
+									<destFileName>tomcat.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
@@ -179,6 +179,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven.war.version}</version>
 				<configuration>
+				 	<warName>ROOT</warName>
 					<webappDirectory>${project.build.directory}/webapps</webappDirectory>
 					<warSourceDirectory>web</warSourceDirectory>
 					<webResources combine.children="append">

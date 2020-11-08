@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+     	 <Resource name="jdbc/DataSource"
+     		auth="Container" type="javax.sql.DataSource"
+     		factory="com.zaxxer.hikari.HikariJNDIFactory"
+     		maxActive="20" maxIdle="4" minIdle="2" initialSize="2"
+     		maxWait="10000"
+     		testWhileIdle="true"
+     		testOnBorrow="true"
+     		validationInterval="30000"
+     		timeBetweenEvictionRunsMillis="30000"
+     		removeAbandonedTimeout="1200"
+     		removeAbandoned="true"
+     		logAbandoned="true"
+     		minEvictableIdleTimeMillis="30000"
+     		jmxEnabled="true"
+     		jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer;org.apache.tomcat.jdbc.pool.interceptor.ResetAbandonedTimer"
+     		driverClassName="org.postgresql.Driver"
+			jdbcUrl=""
+     		username=""
+     		password=""
+     	/>
+</Context>

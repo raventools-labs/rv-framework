@@ -22,7 +22,7 @@ public class Tomcat extends org.apache.catalina.startup.Tomcat {
 	@Getter @Setter private int shutdownPort;
 	
 	public void setConnectors(List<Connector> connectors) {
-		
+
 		for(Connector connector : connectors) {
 			
 			getService().addConnector(connector);

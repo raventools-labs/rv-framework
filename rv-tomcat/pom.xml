@@ -5,11 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.ravencloud</groupId>
-		<artifactId>rv-parent-jar</artifactId>
-		<version>1.0.2-SNAPSHOT</version>
-		<relativePath></relativePath>
+		<artifactId>rv-framework</artifactId>
+		<version>1.0.3</version>
 	</parent>
-
 	<artifactId>rv-tomcat</artifactId>
 	<version>${tomcat.version}</version>
 	<packaging>jar</packaging>
@@ -67,7 +65,7 @@
 		<dependency>
 			<groupId>com.ravencloud</groupId>
 			<artifactId>rv-util</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>${ravencloud.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.hibernate.validator</groupId>

@@ -33,23 +33,25 @@ public enum App implements AppConfig {
 	
 	private Properties properties;
 	
-	App() {
+	private App() {
 		
-		properties = System.getProperties();
+		properties = new Properties();
 		
 		try (InputStream input = ClassUtils.INSTANCE.getResourceFromClasspath(NAME_PROPERTIES)) {
 
 			properties.load(input);
-			
-			config = ConfigFactory.create(AppConfig.class,properties);
 
 		} catch (Exception ex) {
-
-			config = ConfigFactory.create(AppConfig.class, properties);
 
 			LoggerFactory.getLogger(App.class)
 				.warn(MessageFormat.format("Problem to load {0} - cause: {1}", NAME_PROPERTIES, ex.getMessage()));
 		}
+		
+		properties.putAll(System.getProperties());
+
+		properties.putAll(System.getenv());
+		
+		config = ConfigFactory.create(AppConfig.class, properties);
 	}
 	
 	public <V> V getProperty(Class<V> type, String key, V defaultValue) {
@@ -70,6 +72,10 @@ public enum App implements AppConfig {
 	public boolean debugMode() {
 
 		return getProperty(Boolean.class,SystemProperty.DEBUG_MODE.val());
+	}
+
+	public void reload() {
+//		config.reload();
 	}
 
 	@Override
@@ -133,7 +139,5 @@ public enum App implements AppConfig {
 	}
 	
 	@Override
-	public String catalinaHome() {
-		return config.catalinaHome();
-	}
+	public String catalinaHome() { return config.catalinaHome(); }
 }

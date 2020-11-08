@@ -1,0 +1,17 @@
+# Configuración Redisson para Redis en local
+singleServerConfig:
+  address: "redis://localhost:6379" # Cambia el puerto si es necesario
+  timeout: 10000
+  retryAttempts: 3
+  retryInterval: 1000
+  connectionMinimumIdleSize: 1
+  connectionPoolSize: 64
+  subscriptionConnectionMinimumIdleSize: 1
+  subscriptionConnectionPoolSize: 50
+  database: 0
+
+# Otras configuraciones opcionales
+threads: 16 # Número máximo de hilos para operaciones concurrentes
+nettyThreads: 32 # Número de hilos de Netty para operaciones I/O
+
+codec: !<org.redisson.codec.FstCodec> {} # Utilizando el códec FST (puedes cambiarlo según tus necesidades)

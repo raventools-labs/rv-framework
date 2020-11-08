@@ -60,6 +60,7 @@ public interface AppConfig extends Config {
 	@DefaultValue(value = "/")
 	String contextPath();
 	
-	@Key("catalina.home")
+	@Key("CATALINA_HOME")
+	@DefaultValue(value = "./build")
 	String catalinaHome();
 }

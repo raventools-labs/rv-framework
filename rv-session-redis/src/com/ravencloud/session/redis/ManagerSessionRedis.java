@@ -33,7 +33,7 @@ public final class ManagerSessionRedis extends AbstractSessionManager {
 
 	private static final String KEY_RUTE_CONFIG = "redis.configFile";
 	
-	private static final String DEFAULT_VALUE = "/conf/redis.yalm";
+	private static final String DEFAULT_VALUE = "/conf/redis.yaml";
 	
 	private static ISessionManager instance;
 

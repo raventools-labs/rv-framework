@@ -18,10 +18,8 @@
         <parent>
         <artifactId>rv-framework</artifactId>
         <groupId>com.ravencloud</groupId>
-        <version>1.0.2-SNAPSHOT</version>
-        <relativePath></relativePath>
+        <version>1.0.3</version>
     </parent>
-    
     <artifactId>rv-archetype-jar</artifactId>
     <packaging>maven-archetype</packaging>
 

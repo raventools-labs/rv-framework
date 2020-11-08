@@ -17,9 +17,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
         <groupId>com.ravencloud</groupId>
-        <artifactId>rv-parent-jar</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
-        <relativePath></relativePath>
+        <artifactId>rv-framework</artifactId>
+        <version>1.0.3</version>
     </parent>
     
 	<artifactId>rv-session-redis</artifactId>

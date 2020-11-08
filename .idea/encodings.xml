@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-archetype-jar/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-archetype-jar/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-archetype-jar/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-archetype-web/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-archetype-web/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-archetype-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-core/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-core/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-core/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-demo/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-demo/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-demo/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-parent-jar/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-parent-jar/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-parent-jar/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-parent-web/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-parent-web/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-parent-web/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-session-redis/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-session-redis/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-session-redis/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat-dependecies/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat-dependecies/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat-dependecies/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat-dependencies/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat-dependencies/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat-dependencies/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-tomcat/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-util/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-util/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rv-util/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/untitled/properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/untitled/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/untitled/src" charset="UTF-8" />
+  </component>
+</project>
